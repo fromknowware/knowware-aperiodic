@@ -14,6 +14,8 @@ export interface CMSArticle {
   status: string
   excerpt?: string
   body?: unknown
+  htmlBody?: string
+  featureImageUrl?: string
   publishedAt?: string
   readTime?: string
   author?: CMSAuthor | string

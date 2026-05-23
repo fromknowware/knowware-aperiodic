@@ -1,9 +1,29 @@
+/* THIS FILE WAS GENERATED AUTOMATICALLY BY PAYLOAD. */
+import config from '@payload-config'
+import '@payloadcms/next/css'
+import type { ServerFunctionClient } from 'payload'
+import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
 import React from 'react'
-import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
-  title: 'Knowware Aperiodic CMS',
-  description: 'Content management for Knowware Aperiodic',
+import { importMap } from './admin/importMap.js'
+
+type Args = {
+  children: React.ReactNode
 }
 
-export default ({ children }: { children: React.ReactNode }) => children
+const serverFunction: ServerFunctionClient = async function (args) {
+  'use server'
+  return handleServerFunctions({
+    ...args,
+    config,
+    importMap,
+  })
+}
+
+const Layout = ({ children }: Args) => (
+  <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
+    {children}
+  </RootLayout>
+)
+
+export default Layout

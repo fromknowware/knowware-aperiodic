@@ -139,26 +139,39 @@ export default function ArticlePage() {
               </div>
             </div>
 
+            {/* Feature image */}
+            {article.featureImageUrl && (
+              <div className="max-w-[1400px] mx-auto px-4 sm:px-6 mb-4">
+                <img
+                  src={article.featureImageUrl}
+                  alt={article.title}
+                  className="w-full max-h-[520px] object-cover"
+                />
+              </div>
+            )}
+
             {/* Article body */}
             <div className="max-w-[860px] mx-auto px-4 sm:px-6 py-12">
-              {article.body ? (
-                <div className="prose prose-lg prose-gray max-w-none font-serif
-                  prose-headings:font-serif prose-headings:font-bold
-                  prose-p:leading-relaxed prose-p:text-gray-800
-                  prose-a:text-[#ea580c] prose-a:no-underline hover:prose-a:underline">
-                  {/* Rich text body will render here once the lexical renderer is wired up */}
-                  <p className="text-gray-500 italic text-sm border border-dashed border-gray-200 p-4">
-                    Rich text body rendering is available once articles are published through the CMS.
-                    Visit <a href="http://localhost:3001/admin" target="_blank" rel="noreferrer" className="text-[#ea580c]">localhost:3001/admin</a> to add content.
-                  </p>
+              {article.htmlBody ? (
+                <div
+                  className="ghost-content prose prose-lg prose-gray max-w-none font-serif
+                    prose-headings:font-serif prose-headings:font-bold prose-headings:text-black
+                    prose-p:leading-relaxed prose-p:text-gray-800
+                    prose-a:text-[#ea580c] prose-a:no-underline hover:prose-a:underline
+                    prose-img:rounded prose-blockquote:border-l-[#ea580c] prose-blockquote:font-serif
+                    prose-strong:text-black prose-code:text-sm"
+                  dangerouslySetInnerHTML={{ __html: article.htmlBody }}
+                />
+              ) : article.excerpt ? (
+                <div className="bg-gray-50 border border-gray-200 p-8">
+                  <div className="text-[10px] font-sans font-bold text-gray-400 uppercase tracking-widest mb-4">Abstract</div>
+                  <p className="font-serif text-gray-800 leading-relaxed">{article.excerpt}</p>
                 </div>
               ) : (
-                article.excerpt && (
-                  <div className="bg-gray-50 border border-gray-200 p-8">
-                    <div className="text-[10px] font-sans font-bold text-gray-400 uppercase tracking-widest mb-4">Abstract</div>
-                    <p className="font-serif text-gray-800 leading-relaxed">{article.excerpt}</p>
-                  </div>
-                )
+                <p className="text-gray-400 italic font-serif text-sm text-center py-16">
+                  No content yet. Add it via the{' '}
+                  <a href="http://localhost:3001/admin" target="_blank" rel="noreferrer" className="text-[#ea580c] hover:underline">CMS admin</a>.
+                </p>
               )}
             </div>
           </>

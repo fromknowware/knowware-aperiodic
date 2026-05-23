@@ -53,6 +53,7 @@ export const Articles: CollectionConfig = {
         { label: 'Interview', value: 'interview' },
         { label: 'Whitepaper', value: 'whitepaper' },
         { label: 'Sponsored', value: 'sponsored' },
+        { label: 'Newsletter', value: 'newsletter' },
       ],
     },
     {
@@ -66,11 +67,29 @@ export const Articles: CollectionConfig = {
       name: 'body',
       type: 'richText',
       editor: lexicalEditor(),
+      admin: {
+        description: 'Structured rich text — use for native content',
+      },
+    },
+    {
+      name: 'htmlBody',
+      type: 'textarea',
+      admin: {
+        description: 'Raw HTML body — populated from Ghost import, rendered as-is',
+      },
     },
     {
       name: 'featuredImage',
       type: 'upload',
       relationTo: 'media',
+    },
+    {
+      name: 'featureImageUrl',
+      type: 'text',
+      admin: {
+        description: 'External feature image URL (e.g. from Ghost import)',
+        position: 'sidebar',
+      },
     },
     {
       name: 'status',
